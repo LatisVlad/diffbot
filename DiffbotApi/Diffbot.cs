@@ -41,7 +41,7 @@ namespace DiffbotApi
             }
         }
 
-        public Article Article(string url, bool comments = false, bool html = false, bool keepAds = false, bool stats = false, bool summary = false, bool tags = false)
+        public Article Article(string url, bool comments = false, bool html = false, bool keepAds = false, bool stats = false, bool summary = false, bool tags = false, double timeout = 0)
         {
             using (WebClient wc = new WebClient())
             {
@@ -58,6 +58,8 @@ namespace DiffbotApi
                     args.Add(new OptionalParameter() { Name = "summary", Value = "true" });
                 if (tags)
                     args.Add(new OptionalParameter() { Name = "tags", Value = "true" });
+                if (timeout != 0)
+                    args.Add(new OptionalParameter() { Name = "timeout", Value = timeout.ToString() });
 
                 if (_proxy != null)
                 {
